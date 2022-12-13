@@ -448,3 +448,32 @@ var x, y, z;
 // 그룹 연산자를 사용하여 우선순위를 조절
 10 * (2 + 3); // 50
 ```
+
+## 7.8 typeof 연산자
+
+typeof 연산자는 피연산자의 데이터 타입을 `문자열`로 반환한다.
+
+- "string", "number", "boolean", "undefined", "symbol", "object", "function" 중 하나를 반환한다.
+- "null"을 반환하는 경우는 없으며, 함수의 경우 "function"을 반환한다.
+
+```javascript
+typeof NaN; // "number"
+typeof null; // "object"
+typeof /test/gi; // "object"
+```
+
+- typeof 연산자로 null 값을 계산하면 "object"를 반환한다는데 주의해야 한다.
+- 따라서 null 타입은 일치 연산자(===)를 사용해야 한다.
+
+```javascript
+var foo = null;
+
+typeof foo === null; // false
+foo === null; // true
+```
+
+- 또 하나 주의해야 할 것은 선언하지 않은 식별자를 typeof 연산자로 연산해 보면 ReferenceError가 발생하지 않고 undefined를 반환한다.
+
+```javascript
+typeof undeclared; // undefined
+```
