@@ -477,3 +477,55 @@ foo === null; // true
 ```javascript
 typeof undeclared; // undefined
 ```
+
+## 7.9 지수 연산자
+
+ES7에서 도입된 지수 연산자는 좌항의 피연산자를 밑(base)으로, 우항의 피연산자를 지수(exponent)로 거듭 제곱하여 숫자 값을 반환한다.
+
+```javascript
+2 ** 2; // 4
+2 ** 2.5; // 5.65685424949238
+2 ** 0; // 2
+2 ** -2; // 0.25
+```
+
+지수 연산자가 도입되기 이전에는 `Math.pow` 메서드를 사용했다.
+
+```javascript
+Math.pow(2, 2); // 4
+Math.pow(2, 2.5); // 5.65685424949238
+```
+
+지수 연산자는 다음과 같은 경우 Math.pow 메서드보다 가동성이 좋다.
+
+```javascript
+(2 ** 2) ** 2; // 16
+Math.pow(Math.pow(2, 2), 2); // 16
+```
+
+음수를 거듭제곱의 밑으로 사용해 계산하려면 다음과 같이 괄호로 묶어야 한다.
+
+```javascript
+-5 ** 2 // Uncaught SyntaxError: Unary operator used immediately before exponentiation expression. Parenthesis must be used to disambiguate operator precedence
+
+(-5) ** 2 // 25
+```
+
+지수 연산자는 다른 산술 연산자와 마찬가지로 할당 연산자와 함께 사용할 수 있다.
+
+```javascript
+var num = 5;
+
+num ** 2; // 25
+```
+
+지수 연산자는 이항 연산자 중에서 우선순위가 가장 높다.
+
+```javascript
+/* 
+  1. 5의 2승 = 25 
+  2. 2 * 25 = 50
+*/
+
+2 * 5 ** 2; // 50
+```
