@@ -36,4 +36,4 @@
 
 | 이름                                                 | Day1 | Day2 | Day3 | Day4 | Day5 | Day6 | Day7 | Day8 | Day9 | Day10 | Day11 | Day12 | Day13 | Day14 | Day15 |
 | ---------------------------------------------------- | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :---: | :---: | :---: | :---: | :---: | :---: |
-| <center>[정윤혁](https://github.com/hyukzz)</center> |  ✅  |  ✅  |  ✅  |  ✅  |  ✅  |
+| <center>[정윤혁](https://github.com/hyukzz)</center> |  ✅  |  ✅  |  ✅  |  ✅  |  ✅  | ✅ |
