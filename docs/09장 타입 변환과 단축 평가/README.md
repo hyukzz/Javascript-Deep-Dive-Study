@@ -460,3 +460,32 @@ console.log(foo); // "default string"
 var foo = "" ?? "default string";
 console.log(foo); // ""
 ```
+
+## 📔 기억하고 싶은 내용
+
+1. 타입 변환에는 명시적 타입 변환과 암묵적 타입 변환이 있다.
+
+2. false로 평가되는 Falsy 값
+
+- false
+- undefined
+- null
+- 0, -0
+- NaN
+- ''(빈 문자열)
+
+3. 단축 평가에는 논리 연산자를 활용한 단축법이 있다.
+4. 논리 연산자 단축 평가
+
+```javascript
+// 논리합은 하나만 true여도 바로 값을 반환한다.
+true || anything; //true
+false || anything; //anything
+
+// 논리곱은 둘 다 true여야 값을 반환하고 둘 다 true일 때 우항의 값을 반환한다.
+true && anything; //anything
+false && anything; //false
+```
+
+5. 함수 매개변수에 기본값을 설정할 수 잇다.
+6. 옵셔널 체이닝 연산자 ?. 는 좌항의 피연산자가 null 또는 undefined인 경우 undefined를 반환하고, 그렇지 않으면 우항의 프로퍼티 참조를 이어간다.
