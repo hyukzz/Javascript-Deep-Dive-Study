@@ -264,3 +264,116 @@ delete person.address;
 
 console.log(person); // {name: "Lee"}
 ```
+
+## 10.9 ES6에서 추가된 객체 리터럴의 확장 기능
+
+### `10.9.1 프로퍼티 축약 표현`
+
+객체 리터럴의 프로퍼티는 프로퍼티 키와 프로퍼티 값으로 구성된다. 프로퍼티 값은 변수에 할당된 값, 즉 식별자 표현식일 수도 있다.
+
+```javascript
+// ES5
+
+var x = 1,
+	y = 2;
+
+var obj = {
+	x: x,
+	y: y,
+};
+
+console.log(obj); // {x: 1, y: 2} }
+```
+
+```javascript
+// ES6
+
+let x = 1,
+	y = 2;
+
+// 프로퍼티 축약 표현
+
+const obj = {
+	x,
+	y,
+};
+
+console.log(obj); // {x: 1, y: 2}
+```
+
+### `10.9.2 계산된 프로퍼티 이름`
+
+문자열 또는 문자열로 타입 변환할 수 있는 값으로 평가되는 표현식을 사용해 프로퍼티 키를 동적으로 생성할 수도 있다. 단, 프로퍼티 키로 사용할 표현식을 대괄호로 묶어야 한다. 이를 계산된 프로퍼티 이름이라 한다.
+
+ES5에서 계산된 프로퍼티 이름으로 프로퍼티 키를 동적 생성하려면 객체 리터럴 외부에서 대괄호 표기법을 사용해야 한다.
+
+```javascript
+// ES5
+
+var perfix = "prop";
+var i = 0;
+
+var obj = {};
+
+// 계산된 프로퍼티 이름으로 프로퍼티 키 동적 생성
+
+obj[prefix + "-" + ++i] = i;
+obj[prefix + "-" + ++i] = i;
+obj[prefix + "-" + ++i] = i;
+
+console.log(obj); // {prop-1: 1, prop-2: 2, prop3: 3}
+```
+
+ES6에서는 객체 리터럴 내부에서도 계산된 프로퍼티 이름으로 프로퍼티 키를 동적 생성할 수 있다.
+
+```javascript
+// ES6
+
+const prefix = "prop";
+let i = 0;
+
+// 객체 리터럴 내부에서 계산된 프로퍼티 이름으로 프로퍼티 키를 동적 생성
+
+const obj = {
+	[`${prefix}-${++i}`]: i,
+	[`${prefix}-${++i}`]: i,
+	[`${prefix}-${++i}`]: i,
+};
+
+console.log(obj); // {prop-1: 1, prop-2: 2, prop-3: 3}
+```
+
+### `10.9.3 메서드 축약 표현`
+
+ES5에서 메서드를 정의하려면 프로퍼티 값으로 함수를 할당한다.
+
+```javascript
+// ES5
+
+var obj = {
+	name: "Lee",
+	sayHi: function () {
+		console.log("Hi! " + this.name);
+	},
+};
+
+obj.sayHi(); // Hi! Lee
+```
+
+ES6에서는 메서드를 정의할 때 function 키워드를 생략한 축약 표현을 사용할 수 있다.
+
+```javascript
+// ES6
+
+const obj = {
+	name: "Lee",
+	// 메서드 축약 표현
+	sayHi() {
+		console.log("Hi! " + this.name);
+	},
+};
+
+obj.sayHi(); // Hi! Lee
+```
+
+- ES6의 메서드 축약 표현으로 정의한 메서드는 프로퍼티에 할당한 함수와 다르게 동작한다.
