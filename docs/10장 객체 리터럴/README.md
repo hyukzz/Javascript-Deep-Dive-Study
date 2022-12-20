@@ -149,3 +149,59 @@ console.log(circle.getDiameter()); // 10
 ```
 
 - 메서드 내부에서 사용한 this 키워드는 객체 자신(위 예제에서는 circle 객체)을 가리키는 참조변수다.
+
+## 10.5 프로퍼티 접근
+
+프로퍼티에 접근하는 방법은 다음과 같이 두 가지다.
+
+- 마침표 프로퍼티 접근 연산자(.)를 사용하는 `마침표 표기법`(dot notation)
+- 대괄호 프로퍼티 접근 연산자([ ... ])를 사용하는 `대괄호 표기법`(bracket notation)
+
+마침표 프로퍼티 접근 연산자 또는 대괄호 프로퍼티 접근 연산자의 좌측에는 객체로 평가되는 표현식을 기술한다. 마침표 프로퍼티 접근 연산자의 우측 또는 대괄호 프로퍼티 접근 연산자의 내부에는 프로퍼티 키를 지정한다.
+
+```javascript
+var person = {
+	name: "Lee",
+};
+
+// dot natation
+
+console.log(person.name); // Lee
+
+// bracket notation
+
+console.log(person["name"]); // Lee
+```
+
+- 대괄호 표기법을 사용하는 경우 `대괄호 프로퍼티 접근 연산자 내부에 지정하는 프로퍼티 키는 반드시 따옴표로 감싼 문자열`이어야 한다.
+- 따옴표로 감싸지 않은 이름을 프로퍼티 키로 사용하면 자바스크립트 엔진은 식별자로 해석한다.
+- `객체에 존재하지 않는 프로퍼티에 접근하면 undefined를 반환한다.` 이때 참조에러는 발생하지 않는 것에 유의해야 한다.
+
+```javascript
+var person = {
+	name: "Lee",
+};
+
+console.log(person.age); // undefined
+```
+
+```javascript
+프로퍼티 키가 숫자로 이뤄진 문자열인 경우 따옴표 생략이 가능하다.
+
+var person = {
+  'last-name': 'Lee',
+  1: 10
+};
+
+person.last-name // 브라우저 환경: NaN
+                // Node.js: 참조에러
+
+person.1; // SyntaxError: Unexpected number
+person[1]; // 10
+person['1'] // 10
+```
+
+person.last-name을 실행할 때 자바스크립트 엔진은 먼저 person.last를 평가한다. person 객체에는 프로퍼티 키가 last인 프로퍼티가 없기 때문에 person.last는 undefined로 평가된다. 따라서 person.last-name은 undefined - name과 같다.
+다음으로 자바스크립트 엔진은 name이라는 식별자를 찾는다. 이때 name은 프로퍼티 key가 아니라 식별자로 해석되는 것에 주의하자.
+
+Node.js 환경에서는 현재 어디에도 name이라는 식별자(변수, 함수 등의 이름) 선언이 없으므로 참조에러가 발생한다. 그런데 브라우저 환경에서는 name이라는 전역 변수(전역 객체 window의 프로퍼티)가 암묵적으로 존재한다. 전역 변수 name은 창(window)의 이름을 가리키며, 기본값은 빈 문자열이다. 따라서 person.last-name은 undefined - ''과 같으므로 NaN이 된다.
