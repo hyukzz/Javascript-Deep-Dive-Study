@@ -205,3 +205,19 @@ person.last-name을 실행할 때 자바스크립트 엔진은 먼저 person.las
 다음으로 자바스크립트 엔진은 name이라는 식별자를 찾는다. 이때 name은 프로퍼티 key가 아니라 식별자로 해석되는 것에 주의하자.
 
 Node.js 환경에서는 현재 어디에도 name이라는 식별자(변수, 함수 등의 이름) 선언이 없으므로 참조에러가 발생한다. 그런데 브라우저 환경에서는 name이라는 전역 변수(전역 객체 window의 프로퍼티)가 암묵적으로 존재한다. 전역 변수 name은 창(window)의 이름을 가리키며, 기본값은 빈 문자열이다. 따라서 person.last-name은 undefined - ''과 같으므로 NaN이 된다.
+
+## 10.6 프로퍼티 값 갱신
+
+이미 존재하는 프로퍼티에 값을 할당하면 프로퍼티 값이 갱신된다.
+
+```javascript
+var person = {
+	name: "Lee",
+};
+
+// person 객체에 name 프로퍼티가 존재하므로 name 프로퍼티의 값이 갱신된다.
+
+person.name = "Kim";
+
+console.log(person); // {name: 'Kim'}
+```
