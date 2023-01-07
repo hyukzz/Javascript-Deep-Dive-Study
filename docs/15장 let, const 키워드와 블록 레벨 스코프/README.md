@@ -95,3 +95,91 @@ let foo;
 
 - var 키워드로 선언한 전역 변수와 전역 함수 그리고 선언하지 않은 변수에 값을 할당한 암묵적 전역은 전역 객체 window의 프로퍼티가 된다.
 - 전역 객체의 프로퍼티를 참조할 때 window를 생략할 수 있다.
+
+## 15.3 const 키워드
+
+const 키워드는 상수를 선언하기 위해 사용한다. 하지만 반드시 상수만을 위해 사용하지는 않는다. const 키워드의 특징은 let 키워드와 대부분 동일하다.
+
+### `15.3.1 선언과 초기화`
+
+`const 키워드로 선언한 변수는 반드시 선언과 동시에 초기화해야 한다.`
+
+```javascript
+// 옳은 사용법
+const foo = 1;
+
+// 틀린 사용법
+const foo; // SyntaxError: Missing initializer in const declaration
+```
+
+const 키워드로 선언한 변수는 let 키워드로 선언한 변수와 마찬가지로 블록 레벨 스코프를 가지며, 변수 호이스팅이 발생하지 않는 것처럼 동작한다.
+
+```javascript
+{
+  // 변수 호이스팅이 발생하지 않는 것처럼 동작한다.
+  console.log(foo); // ReferenceError: cannot access 'foo' before initialization
+  const foo = 1;
+  console.log(foo); // 1
+}
+
+// 블록 레벨 스코프를 갖는다.
+console.log(foo); // ReferenceError: foo is not defined
+```
+
+### `15.3.2 재할당 금지`
+
+var 또는 let 키워드로 선언한 변수는 재할당이 자유로우나 `const 키워드로 선언한 변수는 재할당이 금지된다.`
+
+```javascript
+const foo = 1;
+foo = 2; // TypeError: Assignment to constant variable.
+```
+
+### `15.3.3 상수`
+
+const 키워드로 선언한 변수에 원시 값을 할당한 경우 변수 값을 변경할 수 없다. 이러한 특징을 이용해 const 키워드를 상수를 표현하는 데 사용하기도 한다. 변수의 상대 개념인 상수는 재할당이 금지된 변수를 말한다. 상수는 상태 유지와 가독성, 유지보수의 편의를 위해 적극적으로 사용해야 한다.
+
+```javascript
+// 세전 가격
+let preTaxPrice = 100;
+
+// 세후 가격
+// 0.1의 의미를 명확히 알기 어렵기 때문에 가독성이 좋지 않다.
+let afterTaxPrice = preTaxPrice + preTaxPrice * 0.1;
+
+console.log(afterTaxPrice); // 110
+```
+
+- 세율은 고정된 값이여서 상수로 정의하면 값의 의미를 쉽게 파악할 수 있고 변경될 수 없는 고정값으로 사용할 수 있다.
+
+```javascript
+// 상수이름은 대문자 스네이크 케이스로 표현하는 것이 일반적이다.
+const TAX_RATE = 0.1;
+
+// 세전 가격
+let preTaxPrice = 100;
+
+// 세후 가격
+let afterTaxPrice = preTaxPrice + preTaxPrice * TAX_RATE;
+
+console.log(afterTaxPrice); // 110
+```
+
+### `15.3.4 const 키워드와 객체`
+
+const 키워드로 선언된 변수에 객체를 할당한 경우 값을 변경할 수 있다. 변경 가능한 값인 객체는 재할당 없이도 직접 변경이 가능하기 때문이다.
+
+```javascript
+const person = {
+  name: "Lee",
+};
+
+// 객체는 변경 가능한 값이다. 따라서 재할당 없이 변경이 가능하다.
+person.name = "Kim";
+
+console.log(person); // {name: "Kim"}
+```
+
+- const 키워드는 재할당을 금지할 뿐 "불변"을 의미하지 않는다.
+- 새로운 값을 재할당하는 것은 불가능하지만 프로퍼티 동적 생성, 삭제, 프로퍼티 값의 변경을 통해 객체를 변경하는 것은 가능하다.
+- 객체가 변경되더라도 변수에 할당된 참조 값은 변경되지 않는다.
